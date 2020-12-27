@@ -1,6 +1,6 @@
 <?php
 
-$message = "";
+$message = ['error' => 'missing parameters'];
 // required headers
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
@@ -22,20 +22,23 @@ $_POST = json_decode($rest_json, true);
     $row = $res->fetchArray();
     if($row){
         http_response_code(200);
-        $message = "connexion avec succes";
-            echo "{$row['id']} {$row['first_name']} {$row['last_name']} {$row['pwd']} \n";
+        $message = [
+            'id' => $row['id'],
+            'first_name' => $row['first_name'],
+            'last_name' => $row['last_name'],
+            'pwd'=> $row['pwd']
+        ];
             session_start();
             $_SESSION["user_name"] = $user_name;
             $_SESSION["id"] = $row['id'];
-            //header('Location: home.js');
+    
         
    }else{
         http_response_code(400);
-        $message = "user not found";
+        $message = ['error'=>'user not found'];
     }
 }
-    echo $message;
-  
-   
+
+echo json_encode($message); 
 
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-$message = "";
+$message = [];
 // required headers
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
@@ -11,18 +11,25 @@ header("Content-Type: application/json; charset=UTF-8");
     $query = "SELECT * FROM events";
     
     $res= $db->query($query);
-    $row = $res->fetchArray();
-    if($row){
-        http_response_code(200);
-        $message = "events retrieved successfully \n";
-            echo "{$row['id']} {$row['event_name']} {$row['start_date']} {$row['end_date']} {$row['place']} {$row['description']} {$row['creator_id']} \n";
-        
+
+    if ($row = $res->fetchArray()){
+                http_response_code(200);
+        while ($row = $res->fetchArray(SQLITE3_NUM)) {
+            $event = [
+             'id' => "{$row[0]}",
+             'event_name' => "{$row[1]}",
+             'start_date' => "{$row[2]}",
+             'end_date' => "{$row[3]}",
+             'place' => "{$row[4]}",
+             'description' => "{$row[5]}",
+             'creator_id' => "{$row[6]}"
+            ];
+            array_push($message, $event);     
+            }
    }else{
         http_response_code(400);
-        $message = "no events found";
+        $message = ['error'=>'no events found'];
     }
-    echo $message;
-  
-   
+echo json_encode($message);    
 
 ?>

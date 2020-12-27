@@ -1,6 +1,6 @@
 <?php
 
-$message = "";
+$message = ['error' => 'missing parameters'];
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, X-Requested-With");
@@ -23,16 +23,14 @@ $_POST = json_decode($rest_json, true);
     // If data inserted then set success message otherwise set error message
     if( $db->exec($query) ){
         http_response_code(200);
-        $message = "Data inserted successfully.";
+        $message = ['success'=>'Data inserted successfully.'];
         
    }else{
         http_response_code(400);
-        $message = "can't create new user.";
+        $message = ['error'=>'failure to create new user.'];
     }
-    echo $message;
  
-//fetching all users just for testing 
 }  
-    
-
+echo json_encode($message);     
+//zid erreur
 ?>

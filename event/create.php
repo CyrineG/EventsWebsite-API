@@ -1,6 +1,6 @@
 <?php
 
-$message = "";
+$message = ['error' => 'missing parameters'];
 // required headers
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Methods: POST");
@@ -12,7 +12,8 @@ $_POST = json_decode($rest_json, true);
 //for now i'll give direct dates bta3 today for both start w end dates
 
    //if( isset($_POST['event_name'])&& isset($_POST['start_date'])&& isset($_POST['end_date'])&&isset($_POST['place'])  &&isset($_POST['description']) &&isset($_POST['creator_id'])){
-if( isset($_POST['event_name'])&& isset($_POST['place'])  &&isset($_POST['description']) &&isset($_POST['creator_id'])){
+
+if( isset($_POST['event_name'])&& isset($_POST['place'])  && isset($_POST['description']) && isset($_POST['creator_id'])){
     // Includs database connection
     include "../db/db_connect.php";
 
@@ -32,16 +33,13 @@ if( isset($_POST['event_name'])&& isset($_POST['place'])  &&isset($_POST['descri
     // If data inserted then set success message otherwise set error message
     if( $db->exec($query) ){
         http_response_code(200);
-        $message = "Event created successfully.";
+        $message = ['success'=>'Event created successfully.'];
         
    }else{
          http_response_code(400);
-        $message = "Error while creating event.";
+        $message = ['error'=>'Error while creating event'];
     }
-    echo $message;
- 
-//fetching all users just for testing 
 }  
-    
+    echo json_encode($message); 
 
 ?>
