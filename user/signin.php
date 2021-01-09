@@ -26,7 +26,9 @@ $_POST = json_decode($rest_json, true);
             'id' => $row['id'],
             'first_name' => $row['first_name'],
             'last_name' => $row['last_name'],
-            'pwd'=> $row['pwd']
+            'user_name'=> $row['user_name'],
+            'pwd'=> $row['pwd'],
+            'admin'=> $row['admin']
         ];
             session_start();
             $_SESSION["user_name"] = $user_name;
