@@ -3,6 +3,7 @@
 $message = ['error' => 'missing parameters'];
 // required headers
 header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, X-Requested-With");
 header("Content-Type: application/json; charset=UTF-8");
 $rest_json = file_get_contents("php://input"); 
 $_POST = json_decode($rest_json, true);
@@ -30,9 +31,6 @@ $_POST = json_decode($rest_json, true);
             'pwd'=> $row['pwd'],
             'admin'=> $row['admin']
         ];
-            session_start();
-            $_SESSION["user_name"] = $user_name;
-            $_SESSION["id"] = $row['id'];
     
         
    }else{
