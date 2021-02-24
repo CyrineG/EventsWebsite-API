@@ -20,8 +20,8 @@ header("Content-Type: application/json; charset=UTF-8");
             'first_name' => "{$row[1]}",
             'last_name' => "{$row[2]}",
             'user_name' => "{$row[3]}",
-            'admin' => "{$row[5]}"
-
+            'admin' => "{$row[5]}",
+            'photo' => "{$row[6]}"
             ];
             array_push($message, $user);     
             }
