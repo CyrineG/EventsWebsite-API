@@ -4,7 +4,8 @@ $database_name = "my_sqlite.db";
 // Database Connection
 $db = new SQLite3($database_name);
 
-$query = "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, first_name STRING, last_name STRING, user_name STRING, pwd STRING, admin BOOLEAN)";
+$query = "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, first_name STRING, last_name STRING, user_name STRING, pwd STRING, admin BOOLEAN,photo STRING)";
+//$query="ALTER TABLE users ADD photo STRING";
 $db->exec($query);
 
 //create default admin

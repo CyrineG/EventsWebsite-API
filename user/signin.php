@@ -29,7 +29,9 @@ $_POST = json_decode($rest_json, true);
             'last_name' => $row['last_name'],
             'user_name'=> $row['user_name'],
             'pwd'=> $row['pwd'],
-            'admin'=> $row['admin']
+            'admin'=> $row['admin'],
+            'photo'=> $row['photo']
+
         ];
     
         
