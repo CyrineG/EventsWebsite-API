@@ -8,21 +8,23 @@ header("Content-Type: application/json; charset=UTF-8");
 $rest_json = file_get_contents("php://input"); 
 $_POST = json_decode($rest_json, true);
 
-   if( isset($_POST['id'])&&isset($_POST['start_date'])&&isset($_POST['end_date']) &&isset($_POST['event_name'])&& isset($_POST['place'])  &&isset($_POST['description']) ){
+   if( isset($_POST['id'])&&isset($_POST['start_date'])&&isset($_POST['end_date']) && isset($_POST['heure_deb'])&& isset($_POST['heure_fin']) &&isset($_POST['event_name'])&& isset($_POST['place'])&&isset($_POST['description']) ){
     // Includs database connection
     include "../db/db_connect.php";
 
     // Gets the data from post
     $id = $_POST['id'];
     $event_name = $_POST['event_name'];
-    $start_date = $_POST['start_date'];
-    $end_date = $_POST['end_date'];
-    //$start_date = "datetime('now','localtime')";
-    //$end_date = "datetime('now','localtime')";
+    $start = $_POST['start_date'];
+    $end = $_POST['end_date'];
+    $heure_deb=$_POST['heure_deb'];
+    $heure_fin=$_POST['heure_fin'];
+    $start_date=$start.' '.$heure_deb.':00';
+    $end_date=$end.' '.$heure_fin.':00';
     $place = $_POST['place'];
     $description = $_POST['description'];
 
-    $query = "UPDATE events SET event_name='$event_name', start_date=$start_date, end_date=$end_date, place='$place', description='$description' WHERE id ='$id'";
+    $query = "UPDATE events SET event_name='$event_name', start_date='$start_date', end_date='$end_date', place='$place', description='$description' WHERE id ='$id'";
     $res= $db->exec($query);
     if($res ){
          http_response_code(200);

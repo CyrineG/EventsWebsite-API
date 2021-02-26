@@ -13,7 +13,7 @@ $_POST = json_decode($rest_json, true);
 
    //if( isset($_POST['event_name'])&& isset($_POST['start_date'])&& isset($_POST['end_date'])&&isset($_POST['place'])  &&isset($_POST['description']) &&isset($_POST['creator_id'])){
 
-if( isset($_POST['event_name']) &&isset($_POST['start_date'])&&isset($_POST['end_date'])&& isset($_POST['place'])  && isset($_POST['description']) && isset($_POST['creator_id'])){
+if( isset($_POST['event_name']) &&isset($_POST['start_date'])&&isset($_POST['end_date'])&& isset($_POST['heure_deb'])&&isset($_POST['heure_fin'])&& isset($_POST['place'])  && isset($_POST['description']) && isset($_POST['creator_id'])){
     // Includs database connection
     include "../db/db_connect.php";
 
@@ -21,11 +21,10 @@ if( isset($_POST['event_name']) &&isset($_POST['start_date'])&&isset($_POST['end
     $event_name = $_POST['event_name'];
     $start = $_POST['start_date'];
     $end = $_POST['end_date'];
-    $start_date=$start.' 00:00:00';
-    $end_date=$end.' 00:00:00';
-
-    //$start_date = datetime($start,'00:00:00');
-    //$end_date = datetime($end,'00:00:00');
+    $heure_deb=$_POST['heure_deb'];
+    $heure_fin=$_POST['heure_fin'];
+    $start_date=$start.' '.$heure_deb.':00';
+    $end_date=$end.' '.$heure_fin.':00';
     $place = $_POST['place'];
     $description = $_POST['description'];
     $creator_id = $_POST['creator_id'];
