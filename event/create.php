@@ -23,8 +23,8 @@ if( isset($_POST['event_name']) &&isset($_POST['start_date'])&&isset($_POST['end
     $end = $_POST['end_date'];
     $heure_deb=$_POST['heure_deb'];
     $heure_fin=$_POST['heure_fin'];
-    $start_date=$start.' '.$heure_deb.':00';
-    $end_date=$end.' '.$heure_fin.':00';
+    $start_date=$start.' '.$heure_deb;
+    $end_date=$end.' '.$heure_fin;
     $place = $_POST['place'];
     $description = $_POST['description'];
     $creator_id = $_POST['creator_id'];
